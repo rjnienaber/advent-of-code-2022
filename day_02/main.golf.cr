@@ -1,0 +1,1 @@
+p ARGF.each_line.sum{|l|%w(_ BX CX AX AY BY CY CZ AZ BZ).index!(l.gsub /\s+/,"")}
