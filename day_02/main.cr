@@ -8,7 +8,7 @@ total = ARGF.each_line.sum do |line|
   when "X" then 0 + SCORING[WINNING[opponent]]
   when "Y" then 3 + SCORING[opponent]
   when "Z" then 6 + SCORING[LOSING[opponent]]
-  else 0
+  else          0
   end
 end
 
