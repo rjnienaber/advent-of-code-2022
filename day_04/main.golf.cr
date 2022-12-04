@@ -1,0 +1,1 @@
+p ARGF.each_line.count{|l|a,b,c,d=l.split(/\W/).map(&.to_i);((a..b).to_a&(c..d).to_a).any?}
