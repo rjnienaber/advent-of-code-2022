@@ -1,23 +1,17 @@
-stacks = [] of Array(Char)
+part_two = part_one = [] of Array(Char)
 ARGF.each_line do |line|
-  break if /\d/.matches?(line)
-  stacks << (1..line.size).step(4).map { |i| line[i] }.to_a
-end
-
-stacks = stacks.transpose.map(&.reject(' ').reverse)
-
-ARGF.gets
-
-moves = ARGF.each_line.map(&.scan(/\d+/).map(&.[0].to_i)).to_a
-
-def output(stacks, moves, reverse = True)
-  moves.each do |(count, src, dest)|
-    values = stacks[src - 1].pop(count)
-    stacks[dest - 1] += reverse ? values.reverse : values
+  case line
+  when /[A-Z]/
+    part_one << (1..line.size).step(4).map { |i| line[i] }.to_a
+  when /^[\d\s]+$/
+    part_one = part_one.transpose.map(&.reject(' ').reverse)
+    part_two = part_one.clone
+  when /\d+/
+    count, from, to = line.scan(/\d+/).map(&.[0].to_i)
+    part_one[to - 1] += part_one[from - 1].pop(count).reverse
+    part_two[to - 1] += part_two[from - 1].pop(count)
   end
-
-  puts stacks.map(&.last).join
 end
 
-output(stacks.clone, moves, true) # TLFGBZHCN
-output(stacks, moves, false)      # QRQFHFWCL
+puts part_one.map(&.last).join
+puts part_two.map(&.last).join
