@@ -28,5 +28,4 @@ filename = "#{root_dir}/day_#{day}/main#{suffix}#{ext}"
 
 full_cmd = "#{cat_cmd} | time -p #{lng_cmd} #{filename}; echo finished"
 opts = { chdir: root_dir }
-p full_cmd
 system("watchexec -c '#{full_cmd}'", opts)
